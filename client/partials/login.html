@@ -1,0 +1,35 @@
+<div ng-controller = "ControllerLogin">
+  <h2> Full MEAN Wall </h2>
+<div ng-if = "welcome_back"><h1> Hi, Welcome back {{name}}  </h1></div>
+<div ng-if = "new_welcome"><h1> First Time! Welcome {{name}}  </h1></div>
+<a href = "/logout">Log Out </a>
+<hr>
+<h3> Post a Message </h3>
+<form ng-submit = "submit(message)">
+<textarea ng-model = "message.info"> </textarea>
+<input type = "submit" value = "Post A Message">
+</form>
+<hr>
+
+<div ng-if = "ShowMessage">
+  <div class = "message" ng-repeat = "data in ShowMessage.data | orderBy: data.createdAt:true">
+
+  <p> {{data._User.UserName}} </p>
+  <p> {{data.Message}} </p>
+  <p> Created on: {{data.createdAt | date:'medium'}} </p>
+
+  <div class = "comment" ng-repeat = "comment in show_comment.data | orderBy: comment.createdAt:false"  ng-if = "data._id == comment._Message" >
+
+<p>"{{comment.Comments}}" -{{comment._User.UserName}}</p>
+<p> {{comment.createdAt | date:'medium'}} </p>
+
+    <!-- show All comments, and if it lines up with the message id filter -->
+  </div>
+  <h3> Post A Comment </h3>
+  <form ng-submit = "submit_comment(data,comment)">
+  <textarea ng-model = "comment"></textarea>
+  <input type = "submit" value = "Post A Comment">
+  </form>
+</div>
+</div>
+</div>
